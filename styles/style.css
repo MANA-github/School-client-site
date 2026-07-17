@@ -1,0 +1,421 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f6fafc;
+    color: #1f2937;
+    font-family: "Yu Gothic", "Hiragino Sans", sans-serif;
+    display: flex;
+}
+
+.sidebar {
+    width: 280px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #e5e7eb;
+    padding: 24px 20px;
+    position: fixed;
+}
+
+.brand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.brand-icon {
+    width: 54px;
+    height: 54px;
+    border: 3px solid #38bdf8;
+    color: #16a34a;
+    border-radius: 20px;
+    display: grid;
+    place-items: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.brand h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.brand p {
+    margin: 4px 0 0;
+    color: #0f9f6e;
+    font-size: 13px;
+}
+
+nav a {
+    display: block;
+    padding: 16px 18px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    color: #374151;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+nav a.active {
+    background: linear-gradient(90deg, #dcfce7, #f1f8f4);
+    color: #13915b;
+}
+
+.contact {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 24px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+}
+
+.contact p {
+    margin: 0 0 6px;
+    color: #64748b;
+}
+
+.contact strong {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.contact span {
+    font-size: 13px;
+    color: #64748b;
+}
+
+main {
+    margin-left: 280px;
+    width: calc(100% - 280px);
+    padding: 28px;
+}
+
+header {
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-area {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    color: #4b5563;
+}
+
+.user {
+    background: #eefbf1;
+    padding: 10px 16px;
+    border-radius: 999px;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.hero {
+    min-height: 210px;
+    background: linear-gradient(135deg, #dff3ff, #ecf8dd);
+    border-radius: 18px;
+    padding: 34px 42px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    overflow: hidden;
+}
+
+.hero h2 {
+    font-size: 32px;
+    margin: 10px 0 16px;
+}
+
+.hero p {
+    line-height: 1.8;
+    font-weight: bold;
+}
+
+.hero-art {
+    position: relative;
+}
+
+.mountain {
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+    width: 320px;
+    height: 110px;
+    background: #a7d7e8;
+    border-radius: 80% 80% 0 0;
+}
+
+.road {
+    position: absolute;
+    right: 120px;
+    bottom: 0;
+    width: 220px;
+    height: 70px;
+    background: #8fd6d5;
+    border-radius: 90% 40% 0 0;
+}
+
+.van {
+    position: absolute;
+    right: 140px;
+    bottom: 28px;
+    font-size: 72px;
+}
+
+.main-cards {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.action-card {
+    background: #fff;
+    padding: 28px;
+    border-radius: 18px;
+    border: 2px solid #e5e7eb;
+}
+
+.action-card h3 {
+    font-size: 24px;
+    margin: 0 0 12px;
+}
+
+.action-card p {
+    color: #4b5563;
+    line-height: 1.7;
+}
+
+.action-card.green {
+    border-color: #86efac;
+}
+
+.action-card.blue {
+    border-color: #93c5fd;
+}
+
+.action-card.orange {
+    border-color: #fdba74;
+}
+
+.action-card.green h3 {
+    color: #059669;
+}
+
+.action-card.blue h3 {
+    color: #2563eb;
+}
+
+.action-card.orange h3 {
+    color: #f97316;
+}
+
+.illustration {
+    font-size: 58px;
+    text-align: center;
+    margin: 24px 0;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-weight: bold;
+    color: white;
+    background: #2563eb;
+    cursor: pointer;
+}
+
+.green button,
+.action-card.green button {
+    background: #16a34a;
+}
+
+.orange button,
+.action-card.orange button {
+    background: #fb923c;
+}
+
+.action-card button {
+    width: 100%;
+    font-size: 16px;
+}
+
+.panel,
+.box {
+    background: #fff;
+    margin-top: 24px;
+    border-radius: 18px;
+    padding: 26px;
+    border: 1px solid #e5e7eb;
+}
+
+form {
+    display: grid;
+    gap: 12px;
+}
+
+input,
+textarea,
+select {
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+}
+
+textarea {
+    height: 100px;
+}
+
+.result {
+    margin-top: 14px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #f0fdf4;
+    display: none;
+    line-height: 1.8;
+}
+
+.bottom {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 24px;
+}
+
+.box h3 {
+    margin-top: 0;
+}
+
+.box h3 span {
+    float: right;
+    font-size: 14px;
+    color: #2563eb;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    padding: 14px 0;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.hospital,
+.reservation {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.hospital p,
+.reservation p {
+    margin: 3px 0 0;
+    color: #64748b;
+}
+
+.hospital button,
+.small-btn {
+    background: white;
+    border: 1px solid #10b981;
+    color: #059669;
+}
+
+.danger {
+    border-color: #fb7185 !important;
+    color: #e11d48 !important;
+}
+
+.mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    color: white;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+}
+
+.green-bg {
+    background: #72c98a;
+}
+
+.blue-bg {
+    background: #60a5fa;
+}
+
+.red-bg {
+    background: #fb7185;
+}
+
+.orange-bg {
+    background: #fb923c;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 14px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+th {
+    background: #f1f5f9;
+}
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .contact {
+        position: static;
+        margin-top: 20px;
+    }
+
+    body {
+        display: block;
+    }
+
+    main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .main-cards,
+    .bottom,
+    .hero {
+        grid-template-columns: 1fr;
+    }
+}
