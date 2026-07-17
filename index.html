@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>つながる医療サポート</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f6fafc;color:#1f2937;font-family:"Yu Gothic","Hiragino Sans",sans-serif;display:flex}
+.sidebar{width:280px;min-height:100vh;background:#fff;border-right:1px solid #e5e7eb;padding:24px 20px;position:fixed}
+.brand{display:flex;gap:12px;align-items:center;margin-bottom:32px}
+.brand-icon{width:54px;height:54px;border:3px solid #38bdf8;color:#16a34a;border-radius:20px;display:grid;place-items:center;font-size:28px;font-weight:bold}
+.brand h1{font-size:20px;margin:0}.brand p{margin:4px 0 0;color:#0f9f6e;font-size:13px}
+nav a{display:block;padding:16px 18px;margin-bottom:8px;border-radius:12px;color:#374151;font-weight:bold;cursor:pointer;text-decoration:none}
+nav a.active{background:linear-gradient(90deg,#dcfce7,#f1f8f4);color:#13915b}
+.contact{position:absolute;left:20px;right:20px;bottom:24px;padding:18px;border:1px solid #e5e7eb;border-radius:16px}
+.contact p{margin:0 0 6px;color:#64748b}.contact strong{display:block;font-size:20px;margin-bottom:6px}.contact span{font-size:13px;color:#64748b}
+main{margin-left:280px;width:calc(100% - 280px);padding:28px}
+header{height:64px;display:flex;justify-content:space-between;align-items:center}.user-area{display:flex;gap:24px;align-items:center;color:#4b5563}.user{background:#eefbf1;padding:10px 16px;border-radius:999px}
+.page{display:none}.page.active{display:block}
+.hero{min-height:210px;background:linear-gradient(135deg,#dff3ff,#ecf8dd);border-radius:18px;padding:34px 42px;display:grid;grid-template-columns:1.2fr 1fr;overflow:hidden}
+.hero h2{font-size:32px;margin:10px 0 16px}.hero p{line-height:1.8;font-weight:bold}.hero-art{position:relative}.mountain{position:absolute;right:20px;bottom:15px;width:320px;height:110px;background:#a7d7e8;border-radius:80% 80% 0 0}.road{position:absolute;right:120px;bottom:0;width:220px;height:70px;background:#8fd6d5;border-radius:90% 40% 0 0}.van{position:absolute;right:140px;bottom:28px;font-size:72px}
+.main-cards{margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}.action-card{background:#fff;padding:28px;border-radius:18px;border:2px solid #e5e7eb}.action-card h3{font-size:24px;margin:0 0 12px}.action-card p{color:#4b5563;line-height:1.7}.action-card.green{border-color:#86efac}.action-card.blue{border-color:#93c5fd}.action-card.orange{border-color:#fdba74}.action-card.green h3{color:#059669}.action-card.blue h3{color:#2563eb}.action-card.orange h3{color:#f97316}.illustration{font-size:58px;text-align:center;margin:24px 0}
+button{border:none;border-radius:10px;padding:14px 18px;font-weight:bold;color:white;background:#2563eb;cursor:pointer}.green button,.action-card.green button{background:#16a34a}.orange button,.action-card.orange button{background:#fb923c}.action-card button{width:100%;font-size:16px}
+.panel,.box{background:#fff;margin-top:24px;border-radius:18px;padding:26px;border:1px solid #e5e7eb}form{display:grid;gap:12px}input,textarea,select{padding:14px;border-radius:10px;border:1px solid #d1d5db;font-size:15px}textarea{height:100px}.result{margin-top:14px;padding:16px;border-radius:12px;background:#f0fdf4;display:none;line-height:1.8}
+.bottom{margin-top:28px;display:grid;grid-template-columns:1fr 1.4fr;gap:24px}.box h3{margin-top:0}.box h3 span{float:right;font-size:14px;color:#2563eb}ul{padding:0;list-style:none}li{padding:14px 0;border-bottom:1px solid #edf2f7}
+.hospital,.reservation{display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:14px;padding:12px;border-bottom:1px solid #edf2f7}.hospital p,.reservation p{margin:3px 0 0;color:#64748b}.hospital button,.small-btn{background:white;border:1px solid #10b981;color:#059669}.danger{border-color:#fb7185!important;color:#e11d48!important}
+.mark{width:42px;height:42px;border-radius:12px;color:white;display:grid;place-items:center;font-weight:bold}.green-bg{background:#72c98a}.blue-bg{background:#60a5fa}.red-bg{background:#fb7185}.orange-bg{background:#fb923c}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}th,td{padding:14px;border-bottom:1px solid #e5e7eb;text-align:left}th{background:#f1f5f9}
+@media(max-width:900px){.sidebar{position:static;width:100%;min-height:auto}.contact{position:static;margin-top:20px}body{display:block}main{margin-left:0;width:100%}.main-cards,.bottom,.hero{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand"><div class="brand-icon">＋</div><div><h1>つながる医療サポート</h1><p>地域の医療とあなたをつなぐ</p></div></div>
+  <nav>
+    <a class="active" onclick="showPage('home',this)">⌂ ホーム</a>
+    <a onclick="showPage('ride',this)">🚐 送迎予約</a>
+    <a onclick="showPage('check',this)">📝 オンライン問診</a>
+    <a onclick="showPage('list',this)">📅 予約一覧</a>
+    <a onclick="showPage('medicine',this)">💊 薬の配達</a>
+    <a onclick="showPage('hospitals',this)">🏥 医療機関一覧</a>
+    <a onclick="showPage('notice',this)">🔔 お知らせ</a>
+  </nav>
+  <div class="contact"><p>お問い合わせ</p><strong>0120-123-456</strong><span>受付時間 平日 9:00〜17:00</span></div>
+</aside>
+
+<main>
+<header><div></div><div class="user-area"><span>🔔 お知らせ</span><div class="user">● 利用者さん</div></div></header>
+
+<section id="home" class="page active">
+  <div class="hero"><div><h2>いつでも、どこでも、安心の医療を。</h2><p>送迎予約、オンライン問診、予約管理をまとめて行える地域医療サポートシステムです。</p></div><div class="hero-art"><div class="mountain"></div><div class="road"></div><div class="van">🚐</div></div></div>
+  <div class="main-cards">
+    <div class="action-card green"><h3>送迎を予約する</h3><p>行き・帰りの病院送迎を予約できます。</p><div class="illustration">🚐 👴</div><button onclick="go('ride')">送迎を予約する 〉</button></div>
+    <div class="action-card blue"><h3>オンライン問診を始める</h3><p>症状を入力すると、緊急度と受診先を判定します。</p><div class="illustration">📋 🩺</div><button onclick="go('check')">問診を始める 〉</button></div>
+    <div class="action-card orange"><h3>薬の配達を予約</h3><p>薬局で受け取る薬の配達を依頼できます。</p><div class="illustration">💊 🏠</div><button onclick="go('medicine')">配達を予約する 〉</button></div>
+    <div class="action-card"><h3>予約一覧を見る</h3><p>送迎・薬配達の予約状況を確認できます。</p><div class="illustration">📅 ⏰</div><button onclick="go('list')">予約一覧を見る 〉</button></div>
+  </div>
+  <div class="bottom">
+    <div class="box"><h3>お知らせ</h3><ul><li><b>2025/05/20</b> 夏季の送迎時間についてのお知らせ</li><li><b>2025/05/15</b> オンライン問診を開始しました</li><li><b>2025/05/10</b> 新しい医療機関が追加されました</li></ul></div>
+    <div class="box"><h3>よく使う医療機関</h3><div id="homeHospitals"></div></div>
+  </div>
+</section>
+
+<section id="ride" class="page">
+  <div class="panel"><h2>送迎予約</h2><form id="rideForm">
+    <input id="rideName" placeholder="名前" required>
+    <input id="rideFrom" placeholder="出発地 例：自宅" required>
+    <select id="rideTo" required></select>
+    <input id="rideDate" type="date" required>
+    <input id="rideTime" type="time" required>
+    <select id="needReturn">
+      <option value="帰りの送迎も予約する">帰りの送迎も予約する</option>
+      <option value="行きのみ予約する">行きのみ予約する</option>
+    </select>
+    <input id="returnTime" type="time" title="帰りの予定時刻">
+    <button>予約する</button>
+  </form><div class="result" id="rideResult"></div></div>
+</section>
+
+<section id="check" class="page">
+  <div class="panel"><h2>オンライン問診</h2><form id="checkForm">
+    <input id="patientName" placeholder="名前" required>
+    <input id="age" type="number" placeholder="年齢" required>
+    <textarea id="symptom" placeholder="症状を入力してください 例：膝が痛い、眠れない、胸が苦しい" required></textarea>
+    <button>AI問診をする</button>
+  </form><div class="result" id="checkResult"></div></div>
+</section>
+
+<section id="list" class="page">
+  <div class="panel"><h2>予約一覧</h2><div id="reservationList"></div><button class="small-btn danger" onclick="clearReservations()">全予約を削除</button></div>
+</section>
+
+
+<section id="medicine" class="page">
+  <div class="panel"><h2>薬の配達予約</h2>
+    <form id="medicineForm">
+      <input id="medName" placeholder="名前" required>
+      <input id="pharmacy" placeholder="薬局名 例：まちの薬局" required>
+      <input id="medAddress" placeholder="配達先住所" required>
+      <input id="medDate" type="date" required>
+      <select id="medTime">
+        <option value="午前">午前</option>
+        <option value="午後">午後</option>
+        <option value="夕方">夕方</option>
+      </select>
+      <textarea id="medMemo" placeholder="連絡事項 例：家族が受け取ります"></textarea>
+      <button>薬の配達を予約する</button>
+    </form>
+    <div class="result" id="medicineResult"></div>
+  </div>
+</section>
+
+<section id="hospitals" class="page">
+  <div class="panel"><h2>医療機関一覧</h2><div id="hospitalList"></div></div>
+</section>
+
+<section id="notice" class="page">
+  <div class="panel"><h2>お知らせ</h2><table><tr><th>日付</th><th>内容</th></tr><tr><td>2025/05/20</td><td>夏季の送迎時間についてのお知らせ</td></tr><tr><td>2025/05/15</td><td>オンライン問診を開始しました</td></tr><tr><td>2025/05/10</td><td>新しい医療機関が追加されました</td></tr></table></div>
+</section>
+</main>
+
+<script>
+const hospitals=[
+  {name:"むらかみ診療所",type:"内科・小児科",tel:"0152-12-3456",icon:"＋",color:"green-bg"},
+  {name:"あさひ総合病院",type:"総合診療科",tel:"0152-98-7654",icon:"＋",color:"blue-bg"},
+  {name:"やすらぎクリニック",type:"心療内科・精神科",tel:"0152-22-3344",icon:"＋",color:"red-bg"},
+  {name:"北の町リハビリセンター",type:"整形外科・リハビリ",tel:"0152-55-9000",icon:"歩",color:"orange-bg"}
+];
+
+function showPage(id,link){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
+  if(link) link.classList.add("active");
+  if(id==="list") renderReservations();
+}
+function go(id){
+  const links=document.querySelectorAll("nav a");
+  const map={home:0,ride:1,check:2,list:3,medicine:4,hospitals:5,notice:6};
+  showPage(id,links[map[id]]);
+}
+function renderHospitals(){
+  const html=hospitals.map(h=>`<div class="hospital"><div class="mark ${h.color}">${h.icon}</div><div><b>${h.name}</b><p>${h.type} / ${h.tel}</p></div><button onclick="alert('${h.name}\\n${h.type}\\n電話：${h.tel}')">詳細を見る</button></div>`).join("");
+  document.getElementById("hospitalList").innerHTML=html;
+  document.getElementById("homeHospitals").innerHTML=html;
+  document.getElementById("rideTo").innerHTML='<option value="">行き先を選択</option>'+hospitals.map(h=>`<option value="${h.name}">${h.name}</option>`).join("");
+}
+function getReservations(){return JSON.parse(localStorage.getItem("reservations")||"[]")}
+function saveReservations(data){localStorage.setItem("reservations",JSON.stringify(data))}
+document.getElementById("rideForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  const data=getReservations();
+  const r={type:"送迎",name:rideName.value,from:rideFrom.value,to:rideTo.value,date:rideDate.value,time:rideTime.value,returnNeed:needReturn.value,returnTime:returnTime.value};
+  data.push(r); saveReservations(data);
+  rideResult.style.display="block";
+  const back = r.returnNeed === "帰りの送迎も予約する" ? `帰り：${r.returnTime || "診察後に連絡"}に迎え予定` : "帰り：予約なし";
+  rideResult.innerHTML=`<strong>${r.name}さんの送迎予約を受け付けました。</strong><br>行き：${r.date} ${r.time}<br>${back}<br>経路：${r.from} → ${r.to}<br>AI判定：同じ方面の利用者と合わせて効率のよい送迎ルートを作成します。`;
+  this.reset();
+});
+document.getElementById("checkForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  const name=patientName.value, age=Number(document.getElementById("age").value), s=symptom.value;
+  let level="低", hospital="むらかみ診療所", advice="まずは近くの診療所に相談してください。", levelColor="#16a34a";
+  if(s.includes("胸")||s.includes("息")||s.includes("強い痛み")||s.includes("倒れ")||s.includes("意識")){level="高";levelColor="#dc2626";hospital="あさひ総合病院";advice="早めの受診が必要です。送迎よりも救急相談を優先してください。"}
+  else if(s.includes("熱")||s.includes("めまい")||s.includes("吐き気")||s.includes("痛い")){level="中";levelColor="#f97316";hospital="むらかみ診療所";advice="当日中の相談をおすすめします。必要に応じて送迎を予約してください。"}
+  else if(s.includes("膝")||s.includes("腰")||s.includes("リハビリ")){level="中";levelColor="#f97316";hospital="北の町リハビリセンター";advice="通院送迎を利用した受診をおすすめします。"}
+  else if(s.includes("眠れない")||s.includes("不安")||s.includes("気分")){level="中";levelColor="#f97316";hospital="やすらぎクリニック";advice="オンライン相談または専門病院への紹介が考えられます。"}
+  if(age>=75) advice+="<br>高齢者のため、家族通知・行き帰りの送迎予約をおすすめします。";
+  checkResult.style.display="block";
+  checkResult.innerHTML=`<strong>${name}さんの問診結果</strong><br><span style="font-size:20px;font-weight:bold;color:${levelColor}">緊急度：${level}</span><br>推奨受診先：${hospital}<br>${advice}<br><br><button onclick="go('ride')">この受診先で送迎予約へ</button>`;
+});
+
+document.getElementById("medicineForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  const data=getReservations();
+  const r={type:"薬配達",name:medName.value,pharmacy:pharmacy.value,address:medAddress.value,date:medDate.value,time:medTime.value,memo:medMemo.value};
+  data.push(r); saveReservations(data);
+  medicineResult.style.display="block";
+  medicineResult.innerHTML=`<strong>${r.name}さんの薬の配達予約を受け付けました。</strong><br>薬局：${r.pharmacy}<br>配達日：${r.date} ${r.time}<br>配達先：${r.address}<br>備考：${r.memo || "なし"}<br>AI判定：通院送迎便や地域配送便と組み合わせて配達します。`;
+  this.reset();
+});
+
+function renderReservations(){
+  const data=getReservations();
+  if(data.length===0){reservationList.innerHTML="<p>現在、予約はありません。</p>";return}
+  reservationList.innerHTML=data.map((r,i)=>{
+    if(r.type==="薬配達"){
+      return `<div class="reservation"><div class="mark orange-bg">💊</div><div><b>${r.name}さん：薬の配達</b><p>${r.date} ${r.time} / ${r.pharmacy} → ${r.address}</p></div><button class="small-btn danger" onclick="deleteReservation(${i})">削除</button></div>`;
+    }
+    const back = r.returnNeed === "帰りの送迎も予約する" ? ` / 帰り ${r.returnTime || "診察後"}` : "";
+    return `<div class="reservation"><div class="mark green-bg">🚐</div><div><b>${r.name}さん：送迎</b><p>${r.date} ${r.time}${back} / ${r.from} → ${r.to}</p></div><button class="small-btn danger" onclick="deleteReservation(${i})">削除</button></div>`;
+  }).join("");
+}
+function deleteReservation(i){const data=getReservations();data.splice(i,1);saveReservations(data);renderReservations()}
+function clearReservations(){if(confirm("すべての予約を削除しますか？")){localStorage.removeItem("reservations");renderReservations()}}
+renderHospitals();
+</script>
+</body>
+</html>
